@@ -1,14 +1,19 @@
 [project]
-name = "olivero"
+name = "orbital"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "sam",email = "contact@justsam.io"}
+    {name = "sam", email = "contact@justsam.io"}
 ]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 dependencies = [
-    "torch (>=2.6.0,<3.0.0)"
+    "torch (>=2.6.0,<3.0.0)",
+    "click (>=8.1.8,<9.0.0)",
+    "lightning (>=2.5.0.post0,<3.0.0)",
+    "transformers (>=4.48.2,<5.0.0)",
+    "tokenizers (>=0.21.0,<0.22.0)",
+    "sentencepiece (>=0.2.0,<0.3.0)"
 ]
 
 
@@ -17,27 +22,29 @@ requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.3.4"
 pytest-cov = "^6.0.0"
+pytest = "^8.3.4"
 ruff = "^0.9.4"
+pre-commit = "^4.1.0"
 
 
 [tool.ruff]
-line-length = 119
-select = [
-    "E",  # pycodestyle errors
-    "W",  # pycodestyle warnings
-    "F",  # pyflakes
-    "I",  # isort
-    "C",  # flake8-comprehensions
-    "B",  # flake8-bugbear
-]
-ignore = []
+# Keep non-lint configurations here (e.g., format settings)
 
-[tool.ruff.per-file-ignores]
-"__init__.py" = ["F401"]
+[tool.ruff.lint]
+ignore = ["E501"]
+select = ["E4", "E7"]
+per-file-ignores = {"__init__.py" = ["F401"]}
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
 addopts = "-ra -q"
+markers = [
+    "integration: marks tests that required model downloads"
+]

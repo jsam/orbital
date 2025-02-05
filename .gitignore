@@ -1,5 +1,6 @@
 # Python
-__pycache__/
+__pycache__
+.pytest_cache
 *.py[cod]
 *$py.class
 *.so
@@ -37,3 +38,8 @@ ENV/
 .coverage
 .pytest_cache/
 htmlcov/
+lightning_logs
+custom_tokenizer*
+expanded_tokenizer
+expanded_vocabulary.json
+tokenizer_configs

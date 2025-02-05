@@ -3,7 +3,6 @@ import torch.nn as nn
 
 
 class PositionalEncoding(nn.Module):
-
     def __init__(self, d_model: int, ctx_len: int, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -24,4 +23,4 @@ class PositionalEncoding(nn.Module):
         self.register_buffer("pe", self.pe)
 
     def forward(self, word_embeddings: torch.tensor) -> torch.tensor:
-        return word_embeddings + self.pe[:word_embeddings.size(0), :]
+        return word_embeddings + self.pe[: word_embeddings.size(0), :]
